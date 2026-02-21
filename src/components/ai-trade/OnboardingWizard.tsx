@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { isSupabaseConfigured, supabase } from "@/integrations/supabase/client";
 import { setAccess } from "@/lib/access";
 import { showError, showSuccess } from "@/utils/toast";
 import { Button } from "@/components/ui/button";
@@ -63,9 +63,9 @@ export default function OnboardingWizard() {
   }, [step]);
 
   async function verify() {
-    if (!supabase) {
+    if (!isSupabaseConfigured) {
       showError(
-        "Supabase не настроен: задайте VITE_SUPABASE_URL и VITE_SUPABASE_ANON_KEY (после этого перезапустите приложение).",
+        "Supabase не настроен. Выберите проект Supabase в интеграции и нажмите Restart.",
       );
       return;
     }
@@ -86,10 +86,18 @@ export default function OnboardingWizard() {
     setChecking(false);
 
     if (error) {
-      throw error;
+      showError(
+        `Ошибка проверки в Supabase: ${("message" in error && (error as any).message) || "неизвестная ошибка"}`,
+      );
+      return;
     }
 
-    const ok = Boolean(data?.ftd) || (data?.sumdep ?? 0) > 0;
+    if (!data) {
+      showError("Trader ID не найден. Проверьте цифры и попробуйте ещё раз.");
+      return;
+    }
+
+    const ok = Boolean(data.ftd) || (data.sumdep ?? 0) > 0;
 
     if (!ok) {
       showError(
