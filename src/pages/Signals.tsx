@@ -90,9 +90,6 @@ export default function Signals() {
                     <h2 className="text-lg font-semibold tracking-tight">
                       Список активов (OTC)
                     </h2>
-                    <p className="text-sm text-muted-foreground">
-                      Все доступные пары и инструменты отображаются как карточки.
-                    </p>
                   </div>
                 </div>
 
