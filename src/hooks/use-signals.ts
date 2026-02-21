@@ -12,7 +12,9 @@ export type TradeSignal = {
   createdAt: number;
 };
 
-const PAIRS = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "USD/CHF", "XAU/USD"];
+import { allTradingAssets } from "@/lib/trading-assets";
+
+const PAIRS = allTradingAssets;
 
 function rand<T>(arr: T[]) {
   return arr[Math.floor(Math.random() * arr.length)]!;

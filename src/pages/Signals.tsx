@@ -9,8 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import SignalCard from "@/components/ai-trade/SignalCard";
+import AssetsPanel from "@/components/ai-trade/AssetsPanel";
 import {
   Bot,
+  CreditCard,
   LogOut,
   Radar,
   ShieldCheck,
@@ -89,6 +91,10 @@ export default function Signals() {
               <ShieldCheck className="h-4 w-4" />
               История
             </TabsTrigger>
+            <TabsTrigger value="assets" className="rounded-lg">
+              <CreditCard className="h-4 w-4" />
+              Активы
+            </TabsTrigger>
             <TabsTrigger value="rules" className="rounded-lg">
               <TriangleAlert className="h-4 w-4" />
               Правила
@@ -128,6 +134,25 @@ export default function Signals() {
                 ))
               )}
             </div>
+          </TabsContent>
+
+          <TabsContent value="assets" className="mt-4">
+            <Card className="rounded-2xl border-border bg-background/40">
+              <CardContent className="p-5 sm:p-6">
+                <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <h2 className="text-lg font-semibold tracking-tight">
+                      Список активов (OTC)
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      Все доступные пары и инструменты отображаются как карточки.
+                    </p>
+                  </div>
+                </div>
+
+                <AssetsPanel />
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="rules" className="mt-4">
