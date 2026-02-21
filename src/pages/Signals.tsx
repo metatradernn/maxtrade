@@ -4,25 +4,17 @@ import { clearAccess, getAccess } from "@/lib/access";
 import { showSuccess } from "@/utils/toast";
 import { useSignals } from "@/hooks/use-signals";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import SignalCard from "@/components/ai-trade/SignalCard";
 import AssetsPanel from "@/components/ai-trade/AssetsPanel";
-import {
-  Bot,
-  CreditCard,
-  LogOut,
-  Radar,
-  ShieldCheck,
-  TriangleAlert,
-} from "lucide-react";
+import { Bot, CreditCard, LogOut, Radar, TriangleAlert } from "lucide-react";
 
 export default function Signals() {
   const navigate = useNavigate();
   const access = getAccess();
-  const { signals, history, runAnalysis } = useSignals();
+  const { runAnalysis } = useSignals();
 
   const traderLabel = useMemo(() => {
     if (!access) return "—";
@@ -82,10 +74,6 @@ export default function Signals() {
 
         <Tabs defaultValue="assets" className="w-full">
           <TabsList className="h-11 rounded-xl bg-secondary/60 p-1">
-            <TabsTrigger value="history" className="rounded-lg">
-              <ShieldCheck className="h-4 w-4" />
-              История
-            </TabsTrigger>
             <TabsTrigger value="assets" className="rounded-lg">
               <CreditCard className="h-4 w-4" />
               Активы
@@ -97,21 +85,6 @@ export default function Signals() {
           </TabsList>
 
 
-          <TabsContent value="history" className="mt-4">
-            <div className="grid gap-3">
-              {history.length === 0 ? (
-                <Card className="rounded-2xl border-border bg-background/40">
-                  <CardContent className="p-4 text-sm text-muted-foreground">
-                    История появится после первого анализа.
-                  </CardContent>
-                </Card>
-              ) : (
-                history.map((s) => (
-                  <SignalCard key={s.id} signal={s} compact />
-                ))
-              )}
-            </div>
-          </TabsContent>
 
           <TabsContent value="assets" className="mt-4">
             <Card className="rounded-2xl border-border bg-background/40">
