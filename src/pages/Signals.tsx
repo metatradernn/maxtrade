@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import AssetsPanel from "@/components/ai-trade/AssetsPanel";
-import { Bot, CreditCard, LogOut, Radar, TriangleAlert } from "lucide-react";
+import { Bot, CreditCard, LogOut, Radar } from "lucide-react";
 
 export default function Signals() {
   const navigate = useNavigate();
@@ -78,10 +78,6 @@ export default function Signals() {
               <CreditCard className="h-4 w-4" />
               Активы
             </TabsTrigger>
-            <TabsTrigger value="rules" className="rounded-lg">
-              <TriangleAlert className="h-4 w-4" />
-              Правила
-            </TabsTrigger>
           </TabsList>
 
 
@@ -105,25 +101,6 @@ export default function Signals() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="rules" className="mt-4">
-            <Card className="rounded-2xl border-border bg-background/40">
-              <CardContent className="space-y-3 p-5 text-sm text-muted-foreground">
-                <p className="text-foreground font-semibold tracking-tight">
-                  Дисклеймер
-                </p>
-                <p>
-                  Сигналы являются информационными и не являются финансовой
-                  рекомендацией. Вы принимаете решения и риски самостоятельно.
-                </p>
-                <p>
-                  Для комфортной работы обычно рекомендуем депозит{" "}
-                  <span className="text-foreground font-medium">от 100$</span>,
-                  а максимально комфортно —{" "}
-                  <span className="text-foreground font-medium">500$</span>.
-                </p>
-              </CardContent>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
     </div>
