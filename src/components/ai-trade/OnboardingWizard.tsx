@@ -124,14 +124,21 @@ export default function OnboardingWizard() {
     setChecking(false);
 
     if (error) {
+      console.error("[onboarding-wizard] supabase verify error", {
+        message: (error as any)?.message,
+      });
       showError(
-        `Ошибка проверки в Supabase: ${("message" in error && (error as any).message) || "неизвестная ошибка"}`,
+        "Доступ отклонён: не подтверждена регистрация по нашей ссылке и/или депозит. Напишите в поддержку.",
       );
+      window.open(TG_SUPPORT, "_blank", "noopener,noreferrer");
       return;
     }
 
     if (!data) {
-      showError("Trader ID не найден. Проверьте цифры и попробуйте ещё раз.");
+      showError(
+        "Доступ отклонён: не подтверждена регистрация по нашей ссылке и/или депозит. Напишите в поддержку.",
+      );
+      window.open(TG_SUPPORT, "_blank", "noopener,noreferrer");
       return;
     }
 
