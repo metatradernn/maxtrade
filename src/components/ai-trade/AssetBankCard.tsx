@@ -210,7 +210,7 @@ export default function AssetBankCard({
       <div className="relative flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Asset
+            Pocket Option
           </p>
           <p
             role="button"
