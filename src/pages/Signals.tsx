@@ -17,7 +17,6 @@ import {
   Radar,
   ShieldCheck,
   TriangleAlert,
-  Zap,
 } from "lucide-react";
 
 export default function Signals() {
@@ -81,12 +80,8 @@ export default function Signals() {
 
         <Separator className="my-6 bg-border/70" />
 
-        <Tabs defaultValue="signals" className="w-full">
+        <Tabs defaultValue="assets" className="w-full">
           <TabsList className="h-11 rounded-xl bg-secondary/60 p-1">
-            <TabsTrigger value="signals" className="rounded-lg">
-              <Zap className="h-4 w-4" />
-              Сигналы
-            </TabsTrigger>
             <TabsTrigger value="history" className="rounded-lg">
               <ShieldCheck className="h-4 w-4" />
               История
@@ -101,24 +96,6 @@ export default function Signals() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="signals" className="mt-4">
-            <div className="grid gap-4 lg:grid-cols-3">
-              {signals.length === 0 ? (
-                <Card className="rounded-2xl border-border bg-background/40 lg:col-span-3">
-                  <CardHeader className="pb-2">
-                    <h2 className="text-lg font-semibold tracking-tight">
-                      Сигналов пока нет
-                    </h2>
-                  </CardHeader>
-                  <CardContent className="text-sm text-muted-foreground">
-                    Нажмите «Запустить анализ», чтобы получить свежие сигналы.
-                  </CardContent>
-                </Card>
-              ) : (
-                signals.map((s) => <SignalCard key={s.id} signal={s} />)
-              )}
-            </div>
-          </TabsContent>
 
           <TabsContent value="history" className="mt-4">
             <div className="grid gap-3">
