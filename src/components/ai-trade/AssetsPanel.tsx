@@ -1,3 +1,4 @@
+import * as React from "react";
 import AssetBankCard from "@/components/ai-trade/AssetBankCard";
 import { tradingAssetGroups, type TradingAssetCategory } from "@/lib/trading-assets";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,8 @@ const categoryMeta: Record<
 };
 
 export default function AssetsPanel() {
+  const [selected, setSelected] = React.useState<string | null>(null);
+
   return (
     <div className="space-y-7">
       {tradingAssetGroups.map((group) => {
@@ -45,9 +48,18 @@ export default function AssetsPanel() {
                 "sm:grid-cols-2 lg:grid-cols-3",
               )}
             >
-              {group.items.map((name) => (
-                <AssetBankCard key={`${group.title}:${name}`} name={name} tone={meta.tone} />
-              ))}
+              {group.items.map((name) => {
+                const key = `${group.title}:${name}`;
+                return (
+                  <AssetBankCard
+                    key={key}
+                    name={name}
+                    tone={meta.tone}
+                    selected={selected === key}
+                    onSelect={() => setSelected(key)}
+                  />
+                );
+              })}
             </div>
           </section>
         );

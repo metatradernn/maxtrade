@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export type TradeDirection = "CALL" | "PUT";
-export type TradeTimeframe = "1m" | "3m" | "5m";
+export type TradeTimeframe = "1m" | "2m" | "3m" | "5m";
 
 export type TradeSignal = {
   id: string;
@@ -26,7 +26,7 @@ function genId() {
 
 function generateSignal(): TradeSignal {
   const direction: TradeDirection = Math.random() > 0.5 ? "CALL" : "PUT";
-  const timeframe: TradeTimeframe = rand(["1m", "3m", "5m"]);
+  const timeframe: TradeTimeframe = rand(["1m", "2m", "3m", "5m"]);
   const confidence = Math.max(58, Math.min(92, Math.round(60 + Math.random() * 35)));
 
   return {
