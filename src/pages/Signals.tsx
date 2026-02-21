@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import AssetsPanel from "@/components/ai-trade/AssetsPanel";
+import AdminGrantPanel from "@/components/ai-trade/AdminGrantPanel";
 import { Bot, CreditCard, LogOut, Radar } from "lucide-react";
 
 export default function Signals() {
@@ -71,6 +72,12 @@ export default function Signals() {
         </div>
 
         <Separator className="my-6 bg-border/70" />
+
+        {access?.isAdmin && (
+          <div className="mb-6">
+            <AdminGrantPanel adminPassword="AK5917906" />
+          </div>
+        )}
 
         <Tabs defaultValue="assets" className="w-full">
           <TabsList className="h-11 rounded-xl bg-secondary/60 p-1">
