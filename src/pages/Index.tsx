@@ -1,6 +1,7 @@
 import TechBackground from "@/components/ai-trade/TechBackground";
 import TechHeader from "@/components/ai-trade/TechHeader";
 import OnboardingWizard from "@/components/ai-trade/OnboardingWizard";
+import AccessStatusCard from "@/components/ai-trade/AccessStatusCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useRef } from "react";
@@ -27,6 +28,8 @@ const Index = () => {
           </div>
 
           <div className="space-y-4">
+            <AccessStatusCard />
+
             <Card className="rounded-2xl border-border bg-card/70 backdrop-blur">
               <CardContent className="p-5">
                 <p className="text-sm font-semibold tracking-tight">
