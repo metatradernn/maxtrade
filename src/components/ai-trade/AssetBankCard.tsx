@@ -30,6 +30,42 @@ const tones: Record<NonNullable<AssetBankCardProps["tone"]>, string> = {
     "border-border/70 bg-background/40 text-foreground shadow-[0_10px_30px_-22px] shadow-black/20",
 };
 
+const chipTones: Record<
+  NonNullable<AssetBankCardProps["tone"]>,
+  { shell: string; a: string; b: string; chipBorder: string }
+> = {
+  indigo: {
+    shell: "border-primary/25 shadow-[0_12px_26px_-18px] shadow-primary/55",
+    a: "bg-indigo-500/22",
+    b: "bg-fuchsia-500/18",
+    chipBorder: "border-indigo-500/25",
+  },
+  teal: {
+    shell: "border-emerald-500/25 shadow-[0_12px_26px_-18px] shadow-emerald-500/55",
+    a: "bg-emerald-500/20",
+    b: "bg-cyan-500/16",
+    chipBorder: "border-emerald-500/25",
+  },
+  amber: {
+    shell: "border-amber-500/25 shadow-[0_12px_26px_-18px] shadow-amber-500/55",
+    a: "bg-amber-500/22",
+    b: "bg-orange-500/16",
+    chipBorder: "border-amber-500/25",
+  },
+  rose: {
+    shell: "border-rose-500/25 shadow-[0_12px_26px_-18px] shadow-rose-500/55",
+    a: "bg-rose-500/20",
+    b: "bg-pink-500/16",
+    chipBorder: "border-rose-500/25",
+  },
+  slate: {
+    shell: "border-foreground/10 shadow-[0_12px_26px_-18px] shadow-black/30",
+    a: "bg-sky-500/14",
+    b: "bg-violet-500/12",
+    chipBorder: "border-foreground/15",
+  },
+};
+
 const tfLabel: Record<TimeframeValue, string> = {
   "1m": "1м",
   "2m": "2м",
@@ -259,9 +295,33 @@ export default function AssetBankCard({
             )}
           </Button>
 
-          <div className="relative grid h-10 w-14 place-items-center rounded-2xl border border-foreground/10 bg-foreground/5">
-            <div className="h-6 w-10 rounded-xl bg-foreground/10" />
-            <div className="absolute -right-2 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-foreground/10" />
+          <div
+            className={cn(
+              "relative grid h-10 w-14 place-items-center overflow-hidden rounded-2xl border bg-foreground/5",
+              chipTones[tone].shell,
+            )}
+            aria-hidden="true"
+          >
+            {/* colorful "bank card" accents */}
+            <div className={cn("pointer-events-none absolute -left-3 -top-3 h-9 w-9 rounded-full blur-[0.5px]", chipTones[tone].a)} />
+            <div className={cn("pointer-events-none absolute -bottom-4 right-0 h-10 w-10 rounded-full blur-[0.5px]", chipTones[tone].b)} />
+            <div className="pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(70%_70%_at_20%_10%,black,transparent)] bg-white/10" />
+
+            {/* chip */}
+            <div
+              className={cn(
+                "relative h-6 w-10 rounded-xl border bg-foreground/10",
+                "shadow-[inset_0_1px_0_0] shadow-white/10",
+                chipTones[tone].chipBorder,
+              )}
+            >
+              <div className="absolute left-1.5 top-1.5 h-[2px] w-5 rounded-full bg-white/15" />
+              <div className="absolute left-1.5 top-3.5 h-[2px] w-7 rounded-full bg-white/10" />
+              <div className="absolute left-1.5 top-[18px] h-[2px] w-4 rounded-full bg-white/10" />
+            </div>
+
+            {/* contactless dot */}
+            <div className="pointer-events-none absolute -right-2 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 shadow-[inset_0_1px_0_0] shadow-white/10" />
           </div>
         </div>
       </div>
